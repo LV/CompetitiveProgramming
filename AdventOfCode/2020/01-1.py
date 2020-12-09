@@ -1,4 +1,4 @@
-file = open('1.txt', 'r')
+file = open('01.txt', 'r')
 list = []
 
 for line in file:
