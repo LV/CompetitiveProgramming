@@ -12,4 +12,4 @@ for i in range(2,999999):
 	if i == digit_sum(i):
 		sum_nums += i
 
-print(sum_nums)
+print(sum_nums) # 443839
