@@ -12,12 +12,19 @@ class Dimension:
     h: int
 
 
-def surface_area(d: Dimension) -> int:
-    return (2 * d.l * d.w) + (2 * d.w * d.h) + (2 * d.h * d.l)
+def smallest_perimeter(d: Dimension) -> int:
+    # Get areas of all different sides
+    areas: list[int] = [d.l * d.w, d.w * d.h, d.h * d.l]
+
+    # Get the index of the smallest area from the sides
+    index: int = areas.index(min(areas))
+
+    # Get the perimeter using the index as a reference of which side to pull from
+    return [(d.l * 2) + (d.w * 2), (d.w * 2) + (d.h * 2), (d.h * 2) + (d.l * 2)][index]
 
 
-def smallest_area(d: Dimension) -> int:
-    return min([d.l * d.w, d.w * d.h, d.h * d.l])
+def multiply_all_sides(d: Dimension) -> int:
+    return d.l * d.w * d.h
 
 
 def parse_line(line: str) -> Dimension:
@@ -34,8 +41,8 @@ def main() -> None:
 
             d: Dimension = parse_line(line)
 
-            total_needed += surface_area(d)
-            total_needed += smallest_area(d)
+            total_needed += smallest_perimeter(d)
+            total_needed += multiply_all_sides(d)
 
     print(total_needed)
 
