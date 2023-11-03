@@ -51,8 +51,6 @@ def is_nice_string(inp: str) -> bool:
 def main() -> None:
     nice_string_count: int = 0
 
-    is_nice_string("qjhvhtzxzqqjkmpb")
-
     with open(file_path, "r") as f:
         for line in f:
             line: str = line.strip()  # remove newline character at the end
