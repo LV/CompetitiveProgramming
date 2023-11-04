@@ -26,7 +26,9 @@ def turn_on(c1: Coordinate, c2: Coordinate, grid: Grid) -> Grid:
     min_y: int = min(c1.y, c2.y)
     max_y: int = max(c1.y, c2.y)
 
-    grid[min_y : max_y + 1, min_x : max_x + 1] = grid[min_y : max_y + 1, min_x : max_x + 1] + 1
+    grid[min_y : max_y + 1, min_x : max_x + 1] = (
+        grid[min_y : max_y + 1, min_x : max_x + 1] + 1
+    )
     return grid
 
 
@@ -36,9 +38,10 @@ def turn_off(c1: Coordinate, c2: Coordinate, grid: Grid) -> Grid:
     min_y: int = min(c1.y, c2.y)
     max_y: int = max(c1.y, c2.y)
 
-
-    grid[min_y : max_y + 1, min_x : max_x + 1] = grid[min_y : max_y + 1, min_x : max_x + 1] - 1
-    grid = np.clip(grid, 0, 9999999999) # Makes 0 minimum (i.e. no negative values)
+    grid[min_y : max_y + 1, min_x : max_x + 1] = (
+        grid[min_y : max_y + 1, min_x : max_x + 1] - 1
+    )
+    grid = np.clip(grid, 0, 9999999999)  # Makes 0 minimum (i.e. no negative values)
     return grid
 
 
@@ -48,7 +51,9 @@ def toggle(c1: Coordinate, c2: Coordinate, grid: Grid) -> Grid:
     min_y: int = min(c1.y, c2.y)
     max_y: int = max(c1.y, c2.y)
 
-    grid[min_y : max_y + 1, min_x : max_x + 1] = grid[min_y : max_y + 1, min_x : max_x + 1] + 2
+    grid[min_y : max_y + 1, min_x : max_x + 1] = (
+        grid[min_y : max_y + 1, min_x : max_x + 1] + 2
+    )
     return grid
 
 
