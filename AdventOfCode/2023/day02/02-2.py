@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 import pathlib
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "02.txt"
+test_file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "02-t.txt"
+input_file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "02-i.txt"
+
 
 MAX_RED = 12
 MAX_GREEN = 13
@@ -64,16 +66,20 @@ def get_power(g: Game) -> int:
     return red * green * blue
 
 
-def main() -> None:
+def solve(inp: pathlib.Path) -> int:
     total: int = 0
 
-    with open(file_path, "r") as f:
+    with open(inp, "r") as f:
         for line in f:
             line: str = line.strip()  # remove newline character at the end
             total += get_power(parse_line(line))
 
-    print(total)
+    return total
 
+
+def main() -> None:
+    assert solve(test_file_path) == 2286
+    print(solve(input_file_path))
 
 if __name__ == "__main__":
     main()
