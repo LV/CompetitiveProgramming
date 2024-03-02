@@ -4,7 +4,7 @@ import numpy as np
 import pathlib
 from typing import TypeAlias
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "06.txt"
+file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve() / "input" / "06.txt"
 
 Grid: TypeAlias = np.ndarray
 

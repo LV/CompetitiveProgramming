@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import pathlib
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "05.txt"
+file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve() / "input" / "05.txt"
 
 
 def is_vowel(char: str) -> bool:

@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from sortedcontainers import SortedDict  # requires `pip install sortedcontainers`
 import pathlib
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "03.txt"
+file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve() / "input" / "03.txt"
 f = open(file_path, "r")
 
 

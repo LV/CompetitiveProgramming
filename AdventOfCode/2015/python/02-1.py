@@ -2,7 +2,7 @@
 from dataclasses import dataclass
 import pathlib
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.resolve() / "02.txt"
+file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve() / "input" / "02.txt"
 
 
 @dataclass
