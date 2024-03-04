@@ -2,9 +2,7 @@ use std::fs;
 use std::io;
 
 mod day01_1;
-// Add more modules as you create them
-// mod day2;
-// mod day3;
+mod day01_2;
 
 fn read_text_files_in_dir(dir_path: &str) -> io::Result<Vec<String>> {
     let mut texts = Vec::new();
@@ -36,10 +34,8 @@ fn main() -> io::Result<()> {
         std::process::exit(1);
     }
     match args[1].as_str() {
-        "01_1" => println!("Day 1 Part 1 Solution: {}", day01_1::solve(&file_inputs[1])),
-        // Add more cases as you add more days
-        // "2" => println!("Day 2 Solution: {}", day2::solve("your input here")),
-        // "3" => println!("Day 3 Solution: {}", day3::solve("your input here")),
+        "01_1" => println!("Day 1 part 1 solution: {}", day01_1::solve(&file_inputs[1])),
+        "01_2" => println!("Day 1 part 2 solution: {}", day01_2::solve(&file_inputs[1])),
         _ => eprintln!("Invalid input: {}", args[1]),
     }
 

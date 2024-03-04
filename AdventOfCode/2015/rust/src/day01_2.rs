@@ -1,15 +1,22 @@
 pub fn solve(input: &str) -> i16 {
-    let mut counter: i16 = 0;
+    let mut floor_counter: i16 = 0;
+    let mut steps: i16 = 0;
 
     for c in input.chars() {
+        steps += 1;
+
         match c {
-            '(' => counter += 1,
-            ')' => counter -= 1,
+            '(' => floor_counter += 1,
+            ')' => floor_counter -= 1,
             _   => {} // do nothing
+        }
+
+        if floor_counter < 0 {
+            return steps
         }
     }
 
-    counter
+    -1
 }
 
 #[cfg(test)]
@@ -19,15 +26,8 @@ mod tests {
     #[test]
     fn test_solve() {
         let test_cases = vec![
-            ("(())", 0),
-            ("()()", 0),
-            ("(((", 3),
-            ("(()(()(", 3),
-            ("))(((((", 3),
-            ("())", -1),
-            ("))(", -1),
-            (")))", -3),
-            (")())())", -3),
+            (")", 1),
+            ("()())", 5)
         ];
 
         for (input, expected) in test_cases {
