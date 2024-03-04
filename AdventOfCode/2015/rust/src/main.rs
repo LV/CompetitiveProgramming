@@ -7,16 +7,18 @@ mod day02_1;
 mod day02_2;
 mod day03_1;
 mod day03_2;
+mod day04;
 
 fn read_text_files_in_dir(dir_path: &str) -> io::Result<Vec<String>> {
     let mut texts = Vec::new();
-    texts.push("stub".to_string()); // pushing stub so that inputs aren't offset by one
+
+    let mut entry_files: Vec<_> = fs::read_dir(dir_path)?.map(|d| d.unwrap().path()).collect();
+    // let mut entry_files: Vec<_> = fs::read_dir(dir_path)?.collect();
+    // entry_files.sort_by_key(|k| );
+    entry_files.sort();
 
     // Iterate over the entries in the given directory.
-    for entry in fs::read_dir(dir_path)? {
-        let entry = entry?;
-        let path = entry.path();
-
+    for path in entry_files {
         // Check if the entry is a file and has a .txt extension.
         if path.is_file() && path.extension().and_then(|s| s.to_str()) == Some("txt") {
             // Read the file's contents and push it into the vector.
@@ -44,6 +46,8 @@ fn main() -> io::Result<()> {
         "02_2" => println!("Day 2 part 2 solution: {}", day02_2::solve(&file_inputs[2])),
         "03_1" => println!("Day 3 part 1 solution: {}", day03_1::solve(&file_inputs[3])),
         "03_2" => println!("Day 3 part 2 solution: {}", day03_2::solve(&file_inputs[3])),
+        "04_1" => println!("Day 4 part 1 solution: {}", day04::solve(&file_inputs[4], 5, '0')),
+        "04_2" => println!("Day 4 part 2 solution: {}", day04::solve(&file_inputs[4], 6, '0')),
         _ => eprintln!("Invalid input: {}", args[1]),
     }
 
