@@ -8,6 +8,8 @@ mod day02_2;
 mod day03_1;
 mod day03_2;
 mod day04;
+mod day05_1;
+mod day05_2;
 
 fn read_text_files_in_dir(dir_path: &str) -> io::Result<Vec<String>> {
     let mut texts = Vec::new();
@@ -48,6 +50,8 @@ fn main() -> io::Result<()> {
         "03_2" => println!("Day 3 part 2 solution: {}", day03_2::solve(&file_inputs[3])),
         "04_1" => println!("Day 4 part 1 solution: {}", day04::solve(&file_inputs[4], 5, '0')),
         "04_2" => println!("Day 4 part 2 solution: {}", day04::solve(&file_inputs[4], 6, '0')),
+        "05_1" => println!("Day 5 part 1 solution: {}", day05_1::solve(&file_inputs[5])),
+        "05_2" => println!("Day 5 part 2 solution: {}", day05_2::solve(&file_inputs[5])),
         _ => eprintln!("Invalid input: {}", args[1]),
     }
 
