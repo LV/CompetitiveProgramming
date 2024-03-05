@@ -10,13 +10,13 @@ mod day03_2;
 mod day04;
 mod day05_1;
 mod day05_2;
+mod day06_1;
+mod day06_2;
 
 fn read_text_files_in_dir(dir_path: &str) -> io::Result<Vec<String>> {
     let mut texts = Vec::new();
 
     let mut entry_files: Vec<_> = fs::read_dir(dir_path)?.map(|d| d.unwrap().path()).collect();
-    // let mut entry_files: Vec<_> = fs::read_dir(dir_path)?.collect();
-    // entry_files.sort_by_key(|k| );
     entry_files.sort();
 
     // Iterate over the entries in the given directory.
@@ -52,6 +52,8 @@ fn main() -> io::Result<()> {
         "04_2" => println!("Day 4 part 2 solution: {}", day04::solve(&file_inputs[4], 6, '0')),
         "05_1" => println!("Day 5 part 1 solution: {}", day05_1::solve(&file_inputs[5])),
         "05_2" => println!("Day 5 part 2 solution: {}", day05_2::solve(&file_inputs[5])),
+        "06_1" => println!("Day 6 part 1 solution: {}", day06_1::solve(&file_inputs[6])),
+        "06_2" => println!("Day 6 part 2 solution: {}", day06_2::solve(&file_inputs[6])),
         _ => eprintln!("Invalid input: {}", args[1]),
     }
 
