@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func OpenFileScanner(filePath string) (*bufio.Scanner, *os.File, error) {
@@ -32,9 +33,15 @@ func main() {
 			return
 		}
 		defer file.Close() // Ensure the file is closed after function execution
+		var instructions []string
+		for scanner.Scan() {
+			instructions = strings.Split(scanner.Text(), ", ")
+		}
 
 		if *part == 1 {
-			fmt.Println(solve01_1(scanner))
+			fmt.Println(solve01_1(instructions))
+		} else if *part == 2 {
+			fmt.Println(solve01_2(instructions))
 		} else {
 			parse_error = true
 		}
