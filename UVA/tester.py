@@ -47,19 +47,24 @@ def run_test(problem_number: str) -> None:
                 print(run_process.stderr)
                 return
 
-        # Compare the program's output with the expected output
+        # Compare the program's output with the expected output line by line
         with open(temp_output_file, "r") as program_output, open(output_file, "r") as expected_output:
             program_output_lines: List[str] = program_output.readlines()
             expected_output_lines: List[str] = expected_output.readlines()
 
-            if program_output_lines == expected_output_lines:
-                print("Test passed!")
-            else:
-                print("Test failed!")
-                print("Expected output:")
-                print("".join(expected_output_lines))
-                print("Program output:")
-                print("".join(program_output_lines))
+            max_lines = max(len(program_output_lines), len(expected_output_lines))
+            for i in range(max_lines):
+                program_line = program_output_lines[i].strip() if i < len(program_output_lines) else ""
+                expected_line = expected_output_lines[i].strip() if i < len(expected_output_lines) else ""
+
+                if program_line == expected_line:
+                    print(f"PASSED Testcase {i + 1}")
+                else:
+                    print(f"FAILED Testcase {i + 1}")
+
+                print(f"[Expect]: {expected_line}")
+                print(f"[Output]: {program_line}")
+                print("")
 
     finally:
         # Clean up the executable and the temporary output file
