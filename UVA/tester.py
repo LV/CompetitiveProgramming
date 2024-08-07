@@ -22,6 +22,10 @@ def run_test(problem_number: str) -> None:
         return
 
     try:
+        # Read the entire input file line by line
+        with open(input_file, "r") as infile:
+            input_lines = infile.readlines()
+
         # Compile the C++ program
         compile_process: subprocess.CompletedProcess = subprocess.run(
             ["g++", source_file, "-o", executable],
@@ -56,14 +60,16 @@ def run_test(problem_number: str) -> None:
             for i in range(max_lines):
                 program_line = program_output_lines[i].strip() if i < len(program_output_lines) else ""
                 expected_line = expected_output_lines[i].strip() if i < len(expected_output_lines) else ""
+                input_line = input_lines[i].strip() if i < len(input_lines) else ""
 
                 if program_line == expected_line:
                     print(f"\033[92mPASSED Testcase {i + 1}\033[0m")  # Green for PASSED
                 else:
                     print(f"\033[91mFAILED Testcase {i + 1}\033[0m")  # Red for FAILED
 
-                print(f"[Expect]: {expected_line}")
-                print(f"[Output]: {program_line}")
+                print(f"[INPUT]:      {input_line}")
+                print(f"[EXPECTED]:   {expected_line}")
+                print(f"[OUTPUT]:     {program_line}")
                 print("")
 
     finally:
