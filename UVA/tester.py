@@ -28,7 +28,7 @@ def run_test(problem_number: str) -> None:
 
         # Compile the C++ program
         compile_process: subprocess.CompletedProcess = subprocess.run(
-            ["g++", source_file, "-o", executable],
+            ["g++", "-std=c++11", source_file, "-o", executable],
             capture_output=True,
             text=True
         )
