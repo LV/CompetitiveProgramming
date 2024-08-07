@@ -29,7 +29,11 @@ const int UNIT = (FULL / MARKS);
 
 int clockwise(int from, int to)
 {
-    int diff = to - from;
+    // FROM 0  TO 39 ==> 9
+    // FROM 0  TO 1  ==> 351
+    // FROM 1  TO 0  ==> 9
+    // FROM 39 TO 0  ==> 351
+    int diff = from - to;
 
     if (diff < 0)
         return (MARKS + diff) * UNIT;
@@ -39,7 +43,11 @@ int clockwise(int from, int to)
 
 int counterclockwise(int from, int to)
 {
-    int diff = to - from;
+    // FROM 0  TO 39 ==> 351
+    // FROM 0  TO 1  ==> 9
+    // FROM 1  TO 0  ==> 351
+    // FROM 39 TO 0  ==> 9
+    int diff = from - to;
 
     if (diff < 0)
         return -diff * UNIT;
@@ -53,6 +61,9 @@ void solve()
 
     while (std::getline(std::cin, line)) {
         std::vector<int> numbers = parseLineToInts(line);
+
+        if (numbers == std::vector<int>{0, 0, 0, 0})
+            break;
 
         int count = 0;
         count += FULL * 2; // 2 full clockwise turns
