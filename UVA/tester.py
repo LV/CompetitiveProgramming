@@ -58,9 +58,9 @@ def run_test(problem_number: str) -> None:
                 expected_line = expected_output_lines[i].strip() if i < len(expected_output_lines) else ""
 
                 if program_line == expected_line:
-                    print(f"PASSED Testcase {i + 1}")
+                    print(f"\033[92mPASSED Testcase {i + 1}\033[0m")  # Green for PASSED
                 else:
-                    print(f"FAILED Testcase {i + 1}")
+                    print(f"\033[91mFAILED Testcase {i + 1}\033[0m")  # Red for FAILED
 
                 print(f"[Expect]: {expected_line}")
                 print(f"[Output]: {program_line}")
