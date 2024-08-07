@@ -1,5 +1,10 @@
-// TEX Quotes
-// https://vjudge.net/problem/UVA-272
+/**
+ * @file UVA-272.cpp
+ * @brief TEX Quotes
+ * @note https://vjudge.net/problem/UVA-272
+ * @author Luis Victoria
+ * @date 2024-08-06 22:24:00
+ */
 
 #include <iostream>
 #include <string>
