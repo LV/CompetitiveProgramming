@@ -105,7 +105,7 @@ def func_parse_line_strs() -> str:
 
 
 def func_parse_line_strs_vec() -> str:
-    return """std::vector<std::string> parseLineToIntsSpecifyingDimensions(const int& dimensions, const std::string& word_line)
+    return """std::vector<std::string> parseLineToStrsSpecifyingDimensions(const int& dimensions, const std::string& word_line)
 {
     std::istringstream stream(word_line);
     std::vector<std::string> words(dimensions);
@@ -203,6 +203,33 @@ def main_with_lines_vec_ints() -> str:
 }"""
 
 
+def main_with_lines_vec_strs() -> str:
+    return """int main()
+{
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0);
+
+    int test_cases;
+    std::cin >> test_cases;
+    std::cin.ignore(); // ignore newline after test_cases
+
+    for (int t = 0; t < test_cases; ++t) {
+        int dimensions;
+        std::cin >> dimensions;
+        std::cin.ignore(); // ignore newline after dimensions
+
+        std::string word_line;
+        std::getline(std::cin, word_line);
+
+        std::vector<std::string> words = parseLineToStrsSpecifyingDimensions(dimensions, word_line);
+        solve(words);
+    }
+
+    return 0;
+}"""
+
+
+
 def main_with_lines() -> str:
     return """int main()
 {
@@ -267,26 +294,31 @@ def ask_and_generate_code_template(problem_number: str, problem_title: str) -> s
             content += f"{imports_parse()}\n\n"
             if has_first_testcase_line_as_vec_length:
                 content += f"{func_parse_line_ints_vec()}\n\n"
-                content += f"{func_solve_ints()}"
+                content += f"{func_solve_ints()}\n\n"
+                content += main_with_lines_vec_ints()
             else:
                 content += f"{func_parse_line_ints()}\n\n"
                 content += f"{func_solve_with_lines_ints()}" if has_first_line_as_num_of_testcases else f"{func_solve_without_lines_ints()}"
+                content += f"\n\n"
+                content += main_with_lines() if has_first_line_as_num_of_testcases else main_without_lines()
         case "strings" | "strs" | "str" | "s":
             content += f"{imports_parse()}\n\n"
             if has_first_testcase_line_as_vec_length:
                 content += f"{func_parse_line_strs_vec()}\n\n"
                 content += f"{func_solve_strs()}"
+                content += main_with_lines_vec_strs()
             else:
                 content += f"{func_parse_line_strs()}\n\n"
                 content += f"{func_solve_with_lines_strs()}" if has_first_line_as_num_of_testcases else f"{func_solve_without_lines_strs()}"
+                content += f"\n\n"
+                content += main_with_lines() if has_first_line_as_num_of_testcases else main_without_lines()
         case _:
             raise ValueError("Invalid type specified")
 
-    main_content: str = main_with_lines() if has_first_line_as_num_of_testcases else main_without_lines()
 
-    content = f"{print_comments(problem_title, problem_number)}\n\n{content}\n\n{main_content}\n"
+    final_content = f"{print_comments(problem_title, problem_number)}\n\n{content}\n"
 
-    return content
+    return final_content
 
 
 def write_to_file(filename: str, content: str):
