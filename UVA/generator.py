@@ -22,12 +22,13 @@ def get_and_write_inputs(input_file: str, output_file: str) -> None:
                 break
             lines.append(line)
         return "\n".join(lines)
+
     try:
-        inp = read_multi_line("Insert input testcases (end with blank line): ")
+        inp = read_multi_line("Insert input testcases (end with blank line): ") + "\n"
         with open(input_file, 'w') as file:
             file.write(inp)
 
-        out = read_multi_line("Insert output testcases (end with blank line): ")
+        out = read_multi_line("Insert output testcases (end with blank line): ") + "\n"
         with open(output_file, 'w') as file:
             file.write(out)
 
