@@ -75,6 +75,21 @@ def func_parse_line_ints() -> str:
 }"""
 
 
+def func_parse_line_ints_vec() -> str:
+    return """std::vector<int> parseLineToIntsSpecifyingDimensions(const int& dimensions, const std::string& number_line)
+{
+    std::istringstream stream(number_line);
+    std::vector<int> numbers(dimensions);
+    int number;
+    unsigned int count = 0;
+
+    while (stream >> number)
+        numbers[count++] = number;
+
+    return numbers;
+}"""
+
+
 def func_parse_line_strs() -> str:
     return """std::vector<std::string> parseLineToStrings(const std::string& line)
 {
@@ -86,6 +101,28 @@ def func_parse_line_strs() -> str:
         words.push_back(word);
 
     return words;
+}"""
+
+
+def func_parse_line_strs_vec() -> str:
+    return """std::vector<std::string> parseLineToIntsSpecifyingDimensions(const int& dimensions, const std::string& word_line)
+{
+    std::istringstream stream(word_line);
+    std::vector<std::string> words(dimensions);
+    std::string word;
+    unsigned int count = 0;
+
+    while (stream >> word)
+        words[count++] = word;
+
+    return words;
+}"""
+
+
+def func_solve_strs() -> str:
+    return """void solve(std::vector<std::string>& word_line)
+{
+    // begin solving here
 }"""
 
 
@@ -111,6 +148,13 @@ def func_solve_without_lines_ints() -> str:
 }"""
 
 
+def func_solve_ints() -> str:
+    return """void solve(std::vector<int>& number_line)
+{
+    // begin solving here
+}"""
+
+
 def func_solve_with_lines_strs() -> str:
     return """void solve(std::string& line)
 {
@@ -130,6 +174,32 @@ def func_solve_without_lines_strs() -> str:
 
         // begin solving here
     }
+}"""
+
+
+def main_with_lines_vec_ints() -> str:
+    return """int main()
+{
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(0);
+
+    int test_cases;
+    std::cin >> test_cases;
+    std::cin.ignore(); // ignore newline after test_cases
+
+    for (int t = 0; t < test_cases; ++t) {
+        int dimensions;
+        std::cin >> dimensions;
+        std::cin.ignore(); // ignore newline after dimensions
+
+        std::string number_line;
+        std::getline(std::cin, number_line);
+
+        std::vector<int> numbers = parseLineToIntsSpecifyingDimensions(dimensions, number_line);
+        solve(numbers);
+    }
+
+    return 0;
 }"""
 
 
@@ -170,13 +240,21 @@ def ask_and_generate_code_template(problem_number: str, problem_title: str) -> s
     print("\nAvailable types: char, default, int, str")
     input_type = input("Specify input type: ")
 
-    main_has_lines: bool = False
-    input_lines_specified = input("Does line 1 specify number of test cases?: ")
-    match input_lines_specified.lower():
+    has_first_line_as_num_of_testcases: bool = False
+    input_has_num_testcases_line = input("Does the first line specify number of test cases?: ")
+    match input_has_num_testcases_line.lower():
         case "yes" | "ye" | "y" | "true" | "t":
-            main_has_lines = True
+            has_first_line_as_num_of_testcases = True
         case "no" | "n" | "false" | "f":
-            main_has_lines = False
+            has_first_line_as_num_of_testcases = False
+
+    has_first_testcase_line_as_vec_length: bool = False
+    input_has_vec_length = input("Does the first line of a testcase specify vector length?: ")
+    match input_has_vec_length.lower():
+        case "yes" | "ye" | "y" | "true" | "t":
+            has_first_testcase_line_as_vec_length = True
+        case "no" | "n" | "false" | "f":
+            has_first_testcase_line_as_vec_length = False
 
     content: str = ""
 
@@ -186,15 +264,25 @@ def ask_and_generate_code_template(problem_number: str, problem_title: str) -> s
         case "default" | "def" | "d":
             raise NotImplementedError("Default Template Not Implemented Yet")
         case "ints" | "int" | "i":
-            content += f"{imports_parse()}\n\n{func_parse_line_ints()}\n\n"
-            content += f"{func_solve_with_lines_ints()}" if main_has_lines else f"{func_solve_without_lines_ints()}"
+            content += f"{imports_parse()}\n\n"
+            if has_first_testcase_line_as_vec_length:
+                content += f"{func_parse_line_ints_vec()}\n\n"
+                content += f"{func_solve_ints()}"
+            else:
+                content += f"{func_parse_line_ints()}\n\n"
+                content += f"{func_solve_with_lines_ints()}" if has_first_line_as_num_of_testcases else f"{func_solve_without_lines_ints()}"
         case "strings" | "strs" | "str" | "s":
-            content += f"{imports_parse()}\n\n{func_parse_line_strs()}\n\n"
-            content += f"{func_solve_with_lines_strs()}()" if main_has_lines else f"{func_solve_without_lines_strs()}"
+            content += f"{imports_parse()}\n\n"
+            if has_first_testcase_line_as_vec_length:
+                content += f"{func_parse_line_strs_vec()}\n\n"
+                content += f"{func_solve_strs()}"
+            else:
+                content += f"{func_parse_line_strs()}\n\n"
+                content += f"{func_solve_with_lines_strs()}" if has_first_line_as_num_of_testcases else f"{func_solve_without_lines_strs()}"
         case _:
             raise ValueError("Invalid type specified")
 
-    main_content: str = main_with_lines() if main_has_lines else main_without_lines()
+    main_content: str = main_with_lines() if has_first_line_as_num_of_testcases else main_without_lines()
 
     content = f"{print_comments(problem_title, problem_number)}\n\n{content}\n\n{main_content}\n"
 
