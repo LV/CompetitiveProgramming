@@ -1,3 +1,11 @@
+"""
+USAGE: python3 tester.py [PROBLEM NUMBER]
+
+Compiles submitted code, inputs test cases from input file and compares program output to expected output file
+
+For maximum compatibility, please create submission templates using `generator.py`
+"""
+
 import subprocess
 import sys
 from typing import List
