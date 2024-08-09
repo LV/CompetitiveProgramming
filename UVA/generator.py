@@ -12,7 +12,11 @@ def check_if_files_exist(input_file: str, output_file: str) -> None:
         return
 
 
-def get_and_write_inputs(input_file: str, output_file: str) -> None:
+def get_and_write_inputs(input_file: str, output_file: str, directory: str) -> None:
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+
     def read_multi_line(prompt: str) -> str:
         print(prompt)
         lines = []
@@ -43,7 +47,7 @@ def print_comments(problem_title: str, problem_number: str) -> str:
     return f"""/**
  * @brief {problem_title}
  * @note https://vjudge.net/problem/UVA-{problem_number}
- * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-{problem_number}.cpp
+ * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-{problem_number}/UVA-{problem_number}.cpp
  * @author Luis Victoria
  * @date {datetime.now().strftime('%Y-%m-%d %H:%M')}
  */"""
@@ -337,11 +341,13 @@ def write_to_file(filename: str, content: str):
 
 def generator(problem_number: str) -> None:
     input_title: str = input("Enter name of problem: ")
-    input_file: str = f"UVA-{problem_number}-input.txt"
-    output_file: str = f"UVA-{problem_number}-output.txt"
+    uva_str: str = f"UVA-{problem_number}"
+    input_file: str = os.path.join(uva_str, f"{uva_str}-input.txt")
+    output_file: str = os.path.join(uva_str, f"{uva_str}-output.txt")
+    cpp_file: str = os.path.join(uva_str, f"{uva_str}.cpp")
     check_if_files_exist(input_file, output_file)
-    get_and_write_inputs(input_file, output_file)
-    write_to_file(f"UVA-{problem_number}.cpp", ask_and_generate_code_template(problem_number, input_title))
+    get_and_write_inputs(input_file, output_file, uva_str)
+    write_to_file(cpp_file, ask_and_generate_code_template(problem_number, input_title))
 
 
 if __name__ == "__main__":

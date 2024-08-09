@@ -1,7 +1,7 @@
 /**
  * @brief Combination Lock
  * @note https://vjudge.net/problem/UVA-10550
- * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-10550.cpp
+ * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-10550/UVA-10550.cpp
  * @author Luis Victoria
  * @date 2024-08-06 22:54:16
  */

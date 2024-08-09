@@ -4,11 +4,11 @@ from typing import List
 import os
 
 def run_test(problem_number: str) -> None:
-    input_file: str = f"UVA-{problem_number}-input.txt"
-    output_file: str = f"UVA-{problem_number}-output.txt"
-    source_file: str = f"UVA-{problem_number}.cpp"
-    executable: str = f"UVA-{problem_number}"
-    temp_output_file: str = "program_output.txt"
+    input_file: str = f"UVA-{problem_number}/UVA-{problem_number}-input.txt"
+    output_file: str = f"UVA-{problem_number}/UVA-{problem_number}-output.txt"
+    source_file: str = f"UVA-{problem_number}/UVA-{problem_number}.cpp"
+    executable: str = f"UVA-{problem_number}UVA-{problem_number}"
+    temp_output_file: str = f"UVA-{problem_number}/program_output.txt"
 
     # Check if input, output, and source files exist
     if not os.path.isfile(input_file):

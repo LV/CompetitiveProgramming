@@ -2,6 +2,7 @@
  * @file UVA-1124.cpp
  * @brief Celebrity Jeopardy
  * @note https://vjudge.net/problem/UVA-1124
+ * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-1124/UVA-1124.cpp
  * @author Luis Victoria
  * @date 2024-08-06 22:28:35
  */

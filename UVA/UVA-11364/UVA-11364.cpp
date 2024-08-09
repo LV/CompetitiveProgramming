@@ -1,7 +1,7 @@
 /**
  * @brief Parking
  * @note https://vjudge.net/problem/UVA-11364
- * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-11364.cpp
+ * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-11364/UVA-11364.cpp
  * @author Luis Victoria
  * @date 2024-08-08 21:45
  */

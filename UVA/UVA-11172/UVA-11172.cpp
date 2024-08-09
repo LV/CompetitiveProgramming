@@ -1,9 +1,9 @@
 /**
- * @brief Searching for Nessy
- * @note https://vjudge.net/problem/UVA-11044
- * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-11044.cpp
+ * @brief Relational Operator
+ * @note https://vjudge.net/problem/UVA-11172
+ * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-11172/UVA-11172.cpp
  * @author Luis Victoria
- * @date 2024-08-07 19:55:57
+ * @date 2024-08-08 00:41
  */
 
 #include <iostream>
@@ -25,8 +25,16 @@ std::vector<int> parseLineToInts(const std::string& line)
 
 void solve(std::string& line)
 {
-    std::vector<int> dimensions = parseLineToInts(line);
-    std::cout << int(dimensions[0]/3) * int(dimensions[1]/3) << "\n";
+    std::vector<int> input_line = parseLineToInts(line);
+
+    if (input_line[0] < input_line[1])
+        std::cout << "<" << "\n";
+
+    else if (input_line[0] > input_line[1])
+        std::cout << ">" << "\n";
+
+    else
+        std::cout << "=" << "\n";
 }
 
 int main()

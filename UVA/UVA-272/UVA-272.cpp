@@ -2,6 +2,7 @@
  * @file UVA-272.cpp
  * @brief TEX Quotes
  * @note https://vjudge.net/problem/UVA-272
+ * @note https://github.com/LV/CompetitiveProgramming/blob/master/UVA/UVA-272/UVA-272.cpp
  * @author Luis Victoria
  * @date 2024-08-06 22:24:00
  */
