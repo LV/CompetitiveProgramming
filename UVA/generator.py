@@ -1,3 +1,8 @@
+"""
+USAGE: python3 generator.py [PROBLEM NUMBER]
+
+Generates base submission file given test case inputs and expected test case outputs
+"""
 from datetime import datetime
 import sys
 import os
