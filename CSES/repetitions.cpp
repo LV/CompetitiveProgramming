@@ -14,10 +14,10 @@ int main()
     std::string inp;
     std::cin >> inp;
 
-    unsigned int max = 0;
-    unsigned int count = 0;
+    size_t max = 0;
+    size_t count = 0;
 
-    char curr;
+    char curr = '\0';
     for (char &c : inp) {
         if (c == curr)
             count++;
