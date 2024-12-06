@@ -1,7 +1,9 @@
-from util.argparse import get_problem_from_argparse, ProblemID
+from util.argparse import get_problem_id_from_argparse, ProblemID
 
 def main():
-    problem: ProblemID = get_problem_from_argparse()
+    """Program startpoint"""
+
+    problem: ProblemID = get_problem_id_from_argparse()
 
 if __name__ == "__main__":
     main()

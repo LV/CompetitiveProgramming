@@ -30,7 +30,7 @@ def _get_part_number(value: str) -> int:
         raise argparse.ArgumentTypeError(f"Part number must be 1 or 2, got {value}")
     return ivalue
 
-def _get_problem_from_argparse() -> ProblemID:
+def get_problem_id_from_argparse() -> ProblemID:
     """Returns a valid ProblemID from ArgParse"""
     parser = argparse.ArgumentParser(
         prog="Advent of Code 2024",
