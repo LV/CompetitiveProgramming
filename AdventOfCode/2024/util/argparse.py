@@ -3,10 +3,10 @@ from dataclasses import dataclass
 from .constants import LATEST_AOC_YEAR
 
 @dataclass
-class ProblemID:
-    """Class for identifying the Advent of Code problem"""
+class PuzzleID:
+    """Class for identifying the Advent of Code puzzle"""
     year: int
-    question: int
+    day: int
     part: int
 
 def _get_year_number(value: str) -> int:
@@ -16,11 +16,11 @@ def _get_year_number(value: str) -> int:
         raise argparse.ArgumentTypeError(f"Year must be between 2015 and {LATEST_AOC_YEAR} inclusive, got {value}")
     return ivalue
 
-def _get_question_number(value: str) -> int:
-    """Validates the question number"""
+def _get_day_number(value: str) -> int:
+    """Validates the day number"""
     ivalue = int(value)
     if not 1 <= ivalue <= 25:
-        raise argparse.ArgumentTypeError(f"Question number must be between 1 and 25 inclusive, got {value}")
+        raise argparse.ArgumentTypeError(f"Day number must be between 1 and 25 inclusive, got {value}")
     return ivalue
 
 def _get_part_number(value: str) -> int:
@@ -30,8 +30,8 @@ def _get_part_number(value: str) -> int:
         raise argparse.ArgumentTypeError(f"Part number must be 1 or 2, got {value}")
     return ivalue
 
-def get_problem_id_from_argparse() -> ProblemID:
-    """Returns a valid ProblemID from ArgParse"""
+def get_puzzle_id_from_argparse() -> PuzzleID:
+    """Returns a valid PuzzleID from ArgParse"""
     parser = argparse.ArgumentParser(
         prog="Advent of Code 2024",
         description="My solutions for Advent of Code 2024",
@@ -39,8 +39,8 @@ def get_problem_id_from_argparse() -> ProblemID:
     )
 
     _ = parser.add_argument('-y', '--year', type=_get_year_number, required=True, help=f"Year; between 2015 and {LATEST_AOC_YEAR} inclusive")
-    _ = parser.add_argument('-q', '--question', type=_get_question_number, required=True, help="Question number; between 1 and 25 inclusive")
+    _ = parser.add_argument('-d', '--day', type=_get_day_number, required=True, help="Day number; between 1 and 25 inclusive")
     _ = parser.add_argument('-p', '--part', type=_get_part_number, required=True, help="Part number; should be 1 or 2")
 
     args = parser.parse_args()
-    return ProblemID(year=args.year, question=args.question, part=args.part)
+    return PuzzleID(year=args.year, day=args.day, part=args.part)
