@@ -1,0 +1,1 @@
+LATEST_AOC_YEAR: int = 2024
