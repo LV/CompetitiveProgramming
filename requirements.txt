@@ -1,2 +1,0 @@
-numpy==1.26.1
-sortedcontainers==2.4.0
