@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
-from dataclasses import dataclass
-import pathlib
+import unittest
+from util.input import run_with_input_lines
+import sys
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve() / "input" / "02.txt"
+from dataclasses import dataclass
 
 
 @dataclass
@@ -25,20 +25,27 @@ def parse_line(line: str) -> Dimension:
     return Dimension(l=int(tupl[0]), w=int(tupl[1]), h=int(tupl[2]))
 
 
-def main() -> None:
+def solve(input: list[str]) -> int:
     total_needed: int = 0
 
-    with open(file_path, "r") as f:
-        for line in f:
-            line: str = line.strip()  # remove newline character at the end
+    for line in input:
+        line: str = line.strip()  # remove newline character at the end
 
-            d: Dimension = parse_line(line)
+        d: Dimension = parse_line(line)
 
-            total_needed += surface_area(d)
-            total_needed += smallest_area(d)
+        total_needed += surface_area(d)
+        total_needed += smallest_area(d)
 
-    print(total_needed)
+    return total_needed
 
 
-if __name__ == "__main__":
-    main()
+class TestSolve(unittest.TestCase):
+    def test_example1(self):
+        self.assertEqual(solve(["2x3x4"]), 58)
+
+    def test_example2(self):
+        self.assertEqual(solve(["1x1x10"]), 43)
+
+
+def run() -> None:
+    run_with_input_lines(2015, 2, 1, sys.modules[__name__])
