@@ -1,5 +1,5 @@
 import unittest
-from util.input import get_input_string
+from util.input import run_with_input_string
 
 def solve(input: str) -> int:
     i: int = 0
@@ -42,8 +42,4 @@ class TestSolve(unittest.TestCase):
         self.assertEqual(solve(")())())"), -3)
 
 def run() -> None:
-    result = unittest.TextTestRunner().run(unittest.defaultTestLoader.loadTestsFromTestCase(TestSolve))
-    if result.wasSuccessful():
-        print("ANSWER: " + str(solve(get_input_string(2015, 1))))
-    else:
-        print("Tests failed!")
+    run_with_input_string(2015, 1, 1, unittest)
