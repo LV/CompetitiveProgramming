@@ -1,6 +1,6 @@
 import pathlib
 
-file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.resolve() / "input" / "01.txt"
+file_path: pathlib.Path = pathlib.Path(__file__).parent.parent.parent.resolve() / "inputs" / "2015" / "day01.txt"
 f = open(file_path, "r")
 
 
